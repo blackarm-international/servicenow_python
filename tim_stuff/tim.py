@@ -1,15 +1,14 @@
 import requests, json, csv
 
 def getCiData(sysparm_query, start, ci_sys_id_hardware_sysid):
-    sysparm_field_list = ['name','u_hardware.u_rack.name']
+    sysparm_field_list = ['fqdn','u_hardware.u_rack.name']
     sysparm_fields = '%2C'.join(sysparm_field_list)
     url = 'https://godaddy.service-now.com/api/now/table/cmdb_ci?sysparm_query=' + sysparm_query + '&sysparm_fields=' + sysparm_fields
     headers = {'Accept':'application/json'}
     response = requests.get(url, auth=(user, pwd), headers=headers)
     if response.status_code == 200:
         for ciData in response.json()["result"]:
-            print(ciData)
-            ci_sys_id_hardware_sysid[ciData['name'].lower()] = ciData['u_hardware.u_rack.name']
+            ci_sys_id_hardware_sysid[ciData['fqdn'].lower()] = ciData['u_hardware.u_rack.name']
 
 ci_sys_id_hardware_sysid = {}
 with open("config.json", "r") as config:
@@ -20,7 +19,7 @@ with open("config.json", "r") as config:
         reader = csv.reader(csv_input, delimiter=';')
         test_data = list(reader)
         # print(test_data)
-        sysparm_query = 'u_hardware.u_rack!=NULL^nameIN'
+        sysparm_query = 'u_hardware.u_rack!=NULL^fqdnIN'
         start = True
         for datum in test_data:
             if start:
@@ -30,7 +29,7 @@ with open("config.json", "r") as config:
                 start = False
             if len(sysparm_query) > 6000:
                 getCiData(sysparm_query, start, ci_sys_id_hardware_sysid)
-                sysparm_query = 'u_hardware.u_rack!=NULL^nameIN'
+                sysparm_query = 'u_hardware.u_rack!=NULL^fqdnIN'
                 start = True
         if sysparm_query != 'nameIN':
             getCiData(sysparm_query, start, ci_sys_id_hardware_sysid)
@@ -48,5 +47,3 @@ with open("config.json", "r") as config:
                 print(ci_sys_id_hardware_sysid[hostname])
             else:
                 print('no rack')
-        print('')
-        print(ci_sys_id_hardware_sysid)
