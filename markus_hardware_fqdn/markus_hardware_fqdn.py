@@ -8,7 +8,7 @@ with open("config.json", "r") as config:
     sysparm_fields = '%2C'.join(sysparm_field_list)
     sysparm_limit = '&sysparm_limit=100'
     sysparm_query = 'install_status!=7^model.u_device_category=6dc12117dbfd10541093f40c0c9619a9^ORmodel.u_device_category=69656ee9db6e4c9ce670d48a489619b0^location=8540336c37c8c78cce4fb15ec3990e1e^u_rackSTARTSWITHSXB1SA'
-    url = 'https://godaddydev.service-now.com/api/now/table/alm_hardware?sysparm_query=' + sysparm_query + '&sysparm_fields=' + sysparm_fields
+    url = 'https://godaddy.service-now.com/api/now/table/alm_hardware?sysparm_query=' + sysparm_query + '&sysparm_fields=' + sysparm_fields
     #  + sysparm_limit
     headers = {'Accept':'application/json'}
     response = requests.get(url, auth=(user, pwd), headers=headers)
@@ -54,7 +54,7 @@ with open("config.json", "r") as config:
         sysparm_field_list = ['parent','child']
         sysparm_fields = '%2C'.join(sysparm_field_list)
         sysparm_query = 'child.sys_idIN' + ','.join(list(rack_sys_id_unique.keys()))
-        url = 'https://godaddydev.service-now.com/api/now/table/cmdb_rel_ci?sysparm_query=' + sysparm_query + '&sysparm_fields=' + sysparm_fields
+        url = 'https://godaddy.service-now.com/api/now/table/cmdb_rel_ci?sysparm_query=' + sysparm_query + '&sysparm_fields=' + sysparm_fields
         headers = {'Accept':'application/json'}
         response = requests.get(url, auth=(user, pwd), headers=headers)
         if response.status_code == 200:
@@ -76,7 +76,7 @@ with open("config.json", "r") as config:
             sysparm_field_list = ['parent','child']
             sysparm_fields = '%2C'.join(sysparm_field_list)
             sysparm_query = 'child.sys_idIN' + ','.join(row_sys_id_list)
-            url = 'https://godaddydev.service-now.com/api/now/table/cmdb_rel_ci?sysparm_query=' + sysparm_query + '&sysparm_fields=' + sysparm_fields
+            url = 'https://godaddy.service-now.com/api/now/table/cmdb_rel_ci?sysparm_query=' + sysparm_query + '&sysparm_fields=' + sysparm_fields
             headers = {'Accept':'application/json'}
             response = requests.get(url, auth=(user, pwd), headers=headers)
             if response.status_code == 200:
@@ -98,7 +98,7 @@ with open("config.json", "r") as config:
                 sysparm_field_list = ['sys_id','name']
                 sysparm_fields = '%2C'.join(sysparm_field_list)
                 sysparm_query = 'sys_idIN' + ','.join(room_sys_id_list)
-                url = 'https://godaddydev.service-now.com/api/now/table/cmdb_ci_computer_room?sysparm_query=' + sysparm_query + '&sysparm_fields=' + sysparm_fields
+                url = 'https://godaddy.service-now.com/api/now/table/cmdb_ci_computer_room?sysparm_query=' + sysparm_query + '&sysparm_fields=' + sysparm_fields
                 headers = {'Accept':'application/json'}
                 response = requests.get(url, auth=(user, pwd), headers=headers)
                 if response.status_code == 200:
