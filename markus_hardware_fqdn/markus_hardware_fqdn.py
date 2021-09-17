@@ -7,7 +7,7 @@ with open("config.json", "r") as config:
     sysparm_field_list = ['ci.fqdn','ci.name','u_rack.name','u_rack.sys_id','location.name','sys_id']
     sysparm_fields = '%2C'.join(sysparm_field_list)
     sysparm_limit = '&sysparm_limit=100'
-    sysparm_query = 'install_status!=7^model.u_device_category=6dc12117dbfd10541093f40c0c9619a9^ORmodel.u_device_category=69656ee9db6e4c9ce670d48a489619b0^location=8540336c37c8c78cce4fb15ec3990e1e^u_rackSTARTSWITHsxb1sa'
+    sysparm_query = 'install_status!=7^model.u_device_category=6dc12117dbfd10541093f40c0c9619a9^ORmodel.u_device_category=69656ee9db6e4c9ce670d48a489619b0^location=8540336c37c8c78cce4fb15ec3990e1e^u_rackSTARTSWITHSXB1SA'
     url = 'https://godaddydev.service-now.com/api/now/table/alm_hardware?sysparm_query=' + sysparm_query + '&sysparm_fields=' + sysparm_fields
     #  + sysparm_limit
     headers = {'Accept':'application/json'}
